@@ -1,0 +1,2813 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Dextroverse - 420-words</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        /* General */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    max-width: 100%;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.preserve-whitespace {
+    white-space: pre-wrap;
+}
+
+.spoiler {
+    /* width: fit-content; */
+    display: inline-block;
+    /* This is more consistent across browsers, the old attribute worked well under Chrome but not FireFox. */
+}
+
+.spoiler--hidden {
+    cursor: pointer;
+}
+
+.spoiler-text {
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-text {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler--hidden .spoiler-text::selection {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-image {
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.spoiler--hidden .spoiler-image * {
+    filter: blur(44px);
+}
+
+.spoiler--hidden .spoiler-image:after {
+    content: "SPOILER";
+    color: #dcddde;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    padding: 100%;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    font-size: 0.9em;
+}
+
+.spoiler--hidden:hover .spoiler-image:after {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.quote {
+    margin: 0.1em 0;
+    padding-left: 0.6em;
+    border-left: 4px solid;
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, monospace;
+}
+
+.pre--multiline {
+    margin-top: 0.25em;
+    padding: 0.5em;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.mention {
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #7289da;
+    background: rgba(114, 137, 218, .1);
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0 0.06em;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1em;
+    height: 1em;
+}
+
+.emoji--large {
+    width: 2.8em;
+    height: 2.8em;
+}
+
+/* Preamble */
+
+.preamble {
+    display: grid;
+    margin: 0 0.3em 0.6em 0.3em;
+    max-width: 100%;
+    grid-template-columns: auto 1fr;
+}
+
+.preamble__guild-icon-container {
+    grid-column: 1;
+}
+
+.preamble__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.preamble__entries-container {
+    grid-column: 2;
+    margin-left: 0.6em;
+}
+
+.preamble__entry {
+    font-size: 1.4em;
+}
+
+.preamble__entry--small {
+    font-size: 1em;
+}
+
+/* Chatlog */
+
+.chatlog {
+    max-width: 100%;
+}
+
+.chatlog__message-group {
+    display: grid;
+    margin: 0 0.6em;
+    padding: 0.9em 0;
+    border-top: 1px solid;
+    grid-template-columns: auto 1fr;
+}
+
+.chatlog__reference-symbol {
+    grid-column: 1;
+    border-style: solid;
+    border-width: 2px 0 0 2px;
+    border-radius: 8px 0 0 0;
+    margin-left: 16px;
+    margin-top: 8px;
+}
+
+.chatlog__reference {
+    display: flex;
+    grid-column: 2;
+    margin-left: 1.2em;
+    margin-bottom: 0.25em;
+    font-size: 0.875em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    align-items: center;
+}
+
+.chatlog__reference-avatar {
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    margin-right: 0.25em;
+}
+
+.chatlog__reference-name {
+    margin-right: 0.25em;
+    font-weight: 600;
+}
+
+.chatlog__reference-link {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chatlog__reference-link:hover {
+    text-decoration: none;
+}
+
+.chatlog__reference-content > * {
+    display: inline;
+}
+
+.chatlog__reference-edited-timestamp {
+    margin-left: 0.25em;
+    font-size: 0.8em;
+}
+
+.chatlog__author-avatar-container {
+    grid-column: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    grid-column: 2;
+    margin-left: 1.2em;
+    min-width: 50%;
+}
+
+.chatlog__author-name {
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 0.3em;
+    font-size: 0.75em;
+}
+
+.chatlog__message {
+    padding: 0.1em 0.3em;
+    margin: 0 -0.3em;
+    background-color: transparent;
+    transition: background-color 1s ease;
+}
+
+.chatlog__content {
+    font-size: 0.95em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 0.15em;
+    font-size: 0.8em;
+}
+
+.chatlog__attachment {
+    margin-top: 0.3em;
+}
+
+.chatlog__attachment-thumbnail {
+    vertical-align: top;
+    max-width: 45vw;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__attachment-container {
+    height: 40px;
+    width: 100%;
+    max-width: 520px;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.chatlog__attachment-icon {
+    float: left;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.chatlog__attachment-icon > .a {
+    fill: #f4f5fb;
+    d: path("M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z");
+}
+
+.chatlog__attachment-icon > .b {
+    fill: #7789c4;
+    d: path("M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z");
+}
+
+.chatlog__attachment-icon > .c {
+    fill: #f4f5fb;
+    d: path("M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z");
+}
+
+.chatlog__attachment-icon > .d {
+    fill: #7789c4;
+    d: path("M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z");
+}
+
+.chatlog__attachment-filesize {
+    color: #72767d;
+    font-size: 12px;
+}
+
+.chatlog__attachment-filename {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.chatlog__embed {
+    display: flex;
+    margin-top: 0.3em;
+    max-width: 520px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 0.25em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.6em;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    display: flex;
+    width: 100%;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    margin-bottom: 0.3em;
+    align-items: center;
+}
+
+.chatlog__embed-author-icon {
+    margin-right: 0.5em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 0.2em;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 0.6em;
+    font-size: 0.875em;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 1.2em;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-image {
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 0.2em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 0.35em 0.1em 0.1em 0.1em;
+    padding: 0.2em 0.35em;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 0.35em;
+    font-size: 0.875em;
+}
+
+.chatlog__bot-tag {
+    position: relative;
+    top: -.2em;
+    margin-left: 0.3em;
+    padding: 0.05em 0.3em;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    font-weight: 500;
+}
+
+/* Postamble */
+
+.postamble {
+    margin: 1.4em 0.3em 0.6em 0.3em;
+    padding: 1em;
+    border-top: 1px solid;
+}
+    </style>
+    <style>
+        /* General */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler-text {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.spoiler--hidden .spoiler-text {
+    background-color: #202225;
+}
+
+.spoiler--hidden:hover .spoiler-text {
+    background-color: rgba(32, 34, 37, 0.8);
+}
+
+.quote {
+    border-color: #4f545c;
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #b9bbbe !important;
+}
+
+/* === Preamble === */
+
+.preamble__entry {
+    color: #ffffff;
+}
+
+/* Chatlog */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__reference-symbol {
+    border-color: #4f545c;
+}
+
+.chatlog__reference {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link {
+    color: #b5b6b8;
+}
+
+.chatlog__reference-link:hover {
+    color: #ffffff;
+}
+
+.chatlog__reference-edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__message--highlighted {
+    background-color: rgba(114, 137, 218, 0.2) !important;
+}
+
+.chatlog__message--pinned {
+    background-color: rgba(249, 168, 37, 0.05);
+}
+
+.chatlog__attachment-container {
+    background-color: #2f3136;
+    border-color: #292b2f;
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-color-pill--default {
+    background-color: rgba(79, 84, 92, 1);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Postamble */
+
+.postamble {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.postamble__entry {
+    color: #ffffff;
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler--hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/237957258661724160/a_e10e3c919e3283fc1fc190a8b5ce7ad4.png" alt="Guild icon">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">Dextroverse</div>
+        <div class="preamble__entry">&#128176;┃The Vaults┃&#128176; / 420-words</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/206505065744171008/064673d76e3c66b318d3ed7e6ab35909.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Hark#8752" data-user-id="206505065744171008" style="color: rgb(255,0,0)">꧁꧂Hark ꧁꧂</span>
+
+
+        <span class="chatlog__timestamp">28-Sep-20 02:20 PM</span>
+
+            <div class="chatlog__message " data-message-id="760219338920820767" id="message-760219338920820767">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Contest submissions, by participating you are entered in the raffle for 1 month discord nitro. in 420 words or less, how did you find the Dextroverse and what does it mean to you? Head to <span class="mention">#deleted-channel</span>  for more info</span>
+
+                                <span class="chatlog__edited-timestamp" title="28-Sep-20 04:22 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/256665331924205568/a_b84d698894788c10406694d7b9f9acc0.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Kerflap&#128720;#7525" data-user-id="256665331924205568" style="">Kerflap&#128720;</span>
+
+
+        <span class="chatlog__timestamp">28-Sep-20 03:03 PM</span>
+
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="760230266173915196" id="message-760230266173915196">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Day 1:
+ Write in 420 words or less about how you found out about dxm and then how you found the dextroverse to have a chance to be part of our raffle to give away the first of the nitros! All posts should be made to <span class="mention">#420-words</span>   Already have nitro? Don&#39;t worry! Feel free to take up your winnings at any time you need or hey, even give it to a friend and spread the love further! 
+Everyone is welcome and urged to participate if for nothing else than the fun of it! I hope everyone here has a great month of October and that everyone can celebrate these 4 years of madness together as one absolutely huge happy trippy hippy fam jam!
+
+GOOD LUCK! 
+<img class="emoji " alt="flappy1" title="flappy1" src="https://cdn.discordapp.com/emojis/660408595128647700.gif"> <img class="emoji " alt="flappy3" title="flappy3" src="https://cdn.discordapp.com/emojis/660408669132816395.gif"> <img class="emoji " alt="flappy2" title="flappy2" src="https://cdn.discordapp.com/emojis/660409152668958720.gif"> <img class="emoji " alt="flappy3" title="flappy3" src="https://cdn.discordapp.com/emojis/660408669132816395.gif"> <img class="emoji " alt="flappy1" title="flappy1" src="https://cdn.discordapp.com/emojis/660408595128647700.gif"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol">
+        </div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="https://cdn.discordapp.com/avatars/256665331924205568/a_b84d698894788c10406694d7b9f9acc0.gif" alt="Avatar">
+                <span class="chatlog__reference-name" title="Kerflap&#128720;#7525" style="">Kerflap&#128720;</span>
+                <a class="chatlog__reference-link" href="#" onclick="scrollToMessage(event, &#39;760230266173915196&#39;)">
+                    <span class="chatlog__reference-content">
+Day 1:
+ Write in 420 words or less about how you found out about dxm and then how you found the dextroverse to have a chance to be part of our raffle to give away the first of the nitros! All posts should be made to <span class="mention">#420-words</span>   Already have nitro? Don&#39;t worry! Feel free to take up your winnings at any time you need or hey, even give it to a friend and spread the love further! 
+Everyone is welcome and urged to participate if for nothing else than the fun of it! I hope everyone here has a great month of October and that everyone can celebrate these 4 years of madness together as one absolutely huge happy trippy hippy fam jam!
+
+GOOD LUCK! 
+<img class="emoji " alt="flappy1" title="flappy1" src="https://cdn.discordapp.com/emojis/660408595128647700.gif"> <img class="emoji " alt="flappy3" title="flappy3" src="https://cdn.discordapp.com/emojis/660408669132816395.gif"> <img class="emoji " alt="flappy2" title="flappy2" src="https://cdn.discordapp.com/emojis/660409152668958720.gif"> <img class="emoji " alt="flappy3" title="flappy3" src="https://cdn.discordapp.com/emojis/660408669132816395.gif"> <img class="emoji " alt="flappy1" title="flappy1" src="https://cdn.discordapp.com/emojis/660408595128647700.gif">                    </span>
+
+                </a>
+        </div>
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/384584261040209921/aecc5e26d6930df7338b129dfb0e7d8e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="pasta#0888" data-user-id="384584261040209921" style="color: rgb(255,0,0)">Pasta</span>
+
+
+        <span class="chatlog__timestamp">28-Sep-20 03:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="760230402563768320" id="message-760230402563768320">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Pinned a message.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/709143457616363613/b9ba16aa86684732dde0146e6a676cf0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="shulgin#1817" data-user-id="709143457616363613" style="color: rgb(228,180,0)">shulgin</span>
+
+
+        <span class="chatlog__timestamp">28-Sep-20 03:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="760244218899070976" id="message-760244218899070976">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">drink syrup get high. find server on internet <img class="emoji " alt="snoop" title="snoop" src="https://cdn.discordapp.com/emojis/734681772666650645.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="thenk" title="thenk" src="https://cdn.discordapp.com/emojis/679965772403048474.png">
+                                <span class="chatlog__reaction-count">2</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/163138444707495936/d66ac95812424573310d19302547d091.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="External#7270" data-user-id="163138444707495936" style="color: rgb(60,231,198)">ethan</span>
+
+
+        <span class="chatlog__timestamp">28-Sep-20 04:11 PM</span>
+
+            <div class="chatlog__message " data-message-id="760247298663383041" id="message-760247298663383041">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i was doing dph and everyone said it was bad for me so i switched to dxm.  i already heard about dv from reddit when i was looking up otc drug memes so i decided to pop in and see how it was here and it was pretty cool so i stayed</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="dphistrash" title="dphistrash" src="https://cdn.discordapp.com/emojis/711340370054611004.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/214954743577968640/b9186abe5edeea32934aa02fdbfcb034.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="celtil#7976" data-user-id="214954743577968640" style="color: rgb(154,110,206)">celtil</span>
+
+
+        <span class="chatlog__timestamp">28-Sep-20 04:15 PM</span>
+
+            <div class="chatlog__message " data-message-id="760248419347857418" id="message-760248419347857418">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">It&#39;s a bit of a sad story but during a particularly strong bout of depression, I was looking up online how many sleeping pills it would take to kill me. (As bad as that sounds it was actually so I wouldn&#39;t take too much, I planned on just trying to knock myself out for 18 hours or something like that.) I found the r/dph sub and found out what that many sleeping pills would actually do (zquil is just dph) and I saw people talking about r/dxm and decided to check it out. Saw a few people describe 3rd and 4th plat trips as feeling like you&#39;re dying/dead and thought &quot;yep, need this in my life&quot; and downed 900mg hbr the next day I had off. Eventually found the dextroverse discord off of the sub a little bit after that. And through some of the trips I&#39;ve had while on dxm, I&#39;ve worked through a lot of my depression, kinda helped put my life into perspective if that makes any sense.</span>
+
+                                <span class="chatlog__edited-timestamp" title="28-Sep-20 04:39 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="upvote" title="upvote" src="https://cdn.discordapp.com/emojis/662001913688096806.png">
+                                <span class="chatlog__reaction-count">2</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="majoraheart" title="majoraheart" src="https://cdn.discordapp.com/emojis/629505178537820184.gif">
+                                <span class="chatlog__reaction-count">3</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/208455968181190658/a_ed759b9aced57e283651455245f6dbf8.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Lysurge Surfer &lt;Dabs|14g Kratom&gt;#0710" data-user-id="208455968181190658" style="color: rgb(99,213,121)">Grandpa</span>
+
+
+        <span class="chatlog__timestamp">28-Sep-20 04:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="760248628676919327" id="message-760248628676919327">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I found the dextroverse on accident really. I was on shrooms and had been reading about how to be safe in dosing dxm, and got the idea to ask if we had a discord. I didn’t join immediately but when I finally did I had done dxm 2-3 times. There began my wonderful relationship with advocating for harm reduction, and this server.</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="geminimushrooms" title="geminimushrooms" src="https://cdn.discordapp.com/emojis/735840413276962858.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/215309196856393728/c8c54e7e858e253872f10bdf2a38bc6b.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Yung Cunt#5225" data-user-id="215309196856393728" style="color: rgb(0,116,128)">@</span>
+
+
+        <span class="chatlog__timestamp">28-Sep-20 04:45 PM</span>
+
+            <div class="chatlog__message " data-message-id="760255959523393537" id="message-760255959523393537">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I found the dextroverse because I wen on the r/drugs discord and it was dead af and boring do I wanted to find some interesting people and noticed the link pinned on the subreddit</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="upvote" title="upvote" src="https://cdn.discordapp.com/emojis/662001913688096806.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/447605992226553857/dd07ab5cf382fd88534ca990430e47ac.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="deep.#6539" data-user-id="447605992226553857" style="color: rgb(255,79,206)">deep.</span>
+
+
+        <span class="chatlog__timestamp">28-Sep-20 05:02 PM</span>
+
+            <div class="chatlog__message " data-message-id="760260214699458591" id="message-760260214699458591">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">hahahahha well I found dxm thru erowid, and the server from r/dxm</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#128079;" title="&#128079;" src="https://twemoji.maxcdn.com/2/72x72/1f44f.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/75324344405864448/f082e5f5180ddc0209a543078a8a9b09.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="╯ ╯ ╯Ⓒ○nⓣℛⓐ╭╭╭#8204" data-user-id="75324344405864448" style="color: rgb(99,213,121)">╯ ╯ ╯Ⓒ○nⓣℛⓐ╭╭╭</span>
+
+
+        <span class="chatlog__timestamp">28-Sep-20 05:15 PM</span>
+
+            <div class="chatlog__message " data-message-id="760263531488346152" id="message-760263531488346152">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i found mucinex in my house nd was like oooooooooooooooo</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="wonkeye" title="wonkeye" src="https://cdn.discordapp.com/emojis/751702586603733002.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/682725376136446097/30b77147d31e6b9df205c9d49dd51eef.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="chang#0814" data-user-id="682725376136446097" style="color: rgb(255,79,206)">chang</span>
+
+
+        <span class="chatlog__timestamp">28-Sep-20 05:18 PM</span>
+
+            <div class="chatlog__message " data-message-id="760264272470605906" id="message-760264272470605906">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I discovered dex when going about a NSFW account on reddit, from that account I found that he posted something about &quot;highjacking&quot; on reddit. Really he was talking about masturbaiting on dxm. I then later entered the subreddit, only to find out that is an OTC but I only tried it like a week later. I found out about the server by typing &quot;dextroverse&quot; on &quot;enter invite&quot; lol.</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="eggplant_rick" title="eggplant_rick" src="https://cdn.discordapp.com/emojis/427021300679311370.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/214954743577968640/b9186abe5edeea32934aa02fdbfcb034.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="celtil#7976" data-user-id="214954743577968640" style="color: rgb(154,110,206)">celtil</span>
+
+
+        <span class="chatlog__timestamp">28-Sep-20 05:46 PM</span>
+
+            <div class="chatlog__message " data-message-id="760271351478616096" id="message-760271351478616096">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">&gt;masturbating on dxm
+
+People do this?</span>
+
+                                <span class="chatlog__edited-timestamp" title="28-Sep-20 05:47 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/511267894139551759/a_224b95de14b3e750b9b0a4751d037f47.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="owen#0420" data-user-id="511267894139551759" style="">owen</span>
+
+
+        <span class="chatlog__timestamp">28-Sep-20 05:47 PM</span>
+
+            <div class="chatlog__message " data-message-id="760271486249992203" id="message-760271486249992203">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">WAIT, THERE&#39;S MORE
+<em>The Monkey&#39;s Chain!</em>
+<em>The Monkey&#39;s Fist!</em>
+<em><strong>THE MONKEY!</strong></em></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/583820305420779536/d01724e6694ba3325187786c1f7a0d53.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="deaddexhead#4218" data-user-id="583820305420779536" style="color: rgb(154,110,206)">deaddexhead</span>
+
+
+        <span class="chatlog__timestamp">28-Sep-20 05:48 PM</span>
+
+            <div class="chatlog__message " data-message-id="760271646501634049" id="message-760271646501634049">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="celtil#7976">@celtil</span> its impossible to finish, i just give up eventually</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/623026833167876113/20a0d9f79a96226a8ee94fef75652a55.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="mars#0447" data-user-id="623026833167876113" style="color: rgb(255,0,0)">mars</span>
+
+
+        <span class="chatlog__timestamp">28-Sep-20 05:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="760273254727548938" id="message-760273254727548938">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I found out about DXM by googling about what otc/household things could get you high (smh) bc I was a teenager who couldn’t get weed. Turns out I enjoy DXM more than weed, and I have a respect for it now. It’s not “something I’ll try bc I can’t get anything better” anymore. I found this server though r/dxm. Made a discord account to join. Came for the DXM discussion, stayed for the friends.</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="upvote" title="upvote" src="https://cdn.discordapp.com/emojis/662001913688096806.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/150731851986763776/ead60d97a1420d8bb3c31425f641bc6a.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="BombDiggity#5316" data-user-id="150731851986763776" style="">BombDiggity</span>
+
+
+        <span class="chatlog__timestamp">28-Sep-20 07:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="760294011515699230" id="message-760294011515699230">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I discovered dxm when I shidded n farded n coomed then I pizzed out my budd and then coomed inside a shid</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="okdad" title="okdad" src="https://cdn.discordapp.com/emojis/666667889993973771.png">
+                                <span class="chatlog__reaction-count">13</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/202994104609669121/e88fe64710767e1b4ad6ac53053df5ad.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="CAPRA KID &#128016;#4666" data-user-id="202994104609669121" style="color: rgb(99,213,121)">CAPRA KID &#128016;</span>
+
+
+        <span class="chatlog__timestamp">28-Sep-20 08:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="760309057562345513" id="message-760309057562345513">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I do not think this story will make me seem any cooler, but here goes nothing. I was bored as fuck, at work. I worked at Rite-aid; a drug store aka. pharmacy. And, I thought to myself &quot;Hey. I wonder if you can get high off anything considered over- the-counter?&quot; So, I googled this. Literally. &quot;legal OTC highs.&quot; the results led me to a bunch of articles and lists about &quot;Legal things that can get you high,&quot; etcetera. There were two drugs that stood out, in particular. You all know which two drugs that is. The two most commonly abused OTC drugs: dextromethorphan, or DXM, and diphenhydramine, or DPH. One was super cheap and easy to acquire, but had overwhelmingly negative experiences amidst users who tried it. DXM, on the other hand, had a more mixed pool of results. While DPH was labelled as an instant bad trip, DXM followed what became referred to as the &quot;rule of thirds.&quot; One third of people who tried it loved it, enough to do it again and again. Another third was more neutral, or unsure if they liked it or not. And, the final third hated it, and never wanted to try it again. Naturally, I fall into the first category, since I&#39;ve been here, on-and-off for almost three years. (It will be three years in late October.) (1/2 - char limit lol)</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#128016;" title="&#128016;" src="https://twemoji.maxcdn.com/2/72x72/1f410.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+            <div class="chatlog__message " data-message-id="760309085118660648" id="message-760309085118660648">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(2/2) My first experiences were from Rite-Aid brand DXM cough syrup. (Gross.) Thanks to the helpful advice of users in the Dextroverse, I found a few reliable sources of a much better alternative to cough syrup; gel caps. While swallowing that many pills was kind of a hassle, it was certainly preferable to chugging gross syrup. Much less puking in the trips following the discovery of gelcaps, and from there on out, I was hooked. Was even forced to do rehab, since I lived under my Grandmother&#39;s roof. (She did not like my DXM use at all.) Eventually, I was able to move in with my Dad. While he didn&#39;t particularly approve of my use, either, he wasn&#39;t as vigilant as my grandmother was, and I was able to get away with some way crazier shit. Now, since I live in my own apartment with my boyfriend, Johnny, (who now also trips) I can just order robocough in bulk, for much cheaper than it costs to do gel caps, or syrup, etc. And, it&#39;s way easier to dose. If you&#39;re not on that robocough bandwagon yet, you are missing out.</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#128117;" title="&#128117;" src="https://twemoji.maxcdn.com/2/72x72/1f475.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+            <div class="chatlog__message " data-message-id="760309185501462579" id="message-760309185501462579">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">should be exactly 420 words, altho i was generous with what was considered a &quot;word.&quot;</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/237070438738558978/a_2b1db5f90f9802a470235ca7bf0940f2.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Stanton Broan [TNOA]#1412" data-user-id="237070438738558978" style="color: rgb(154,110,206)">Stanton.</span>
+
+
+        <span class="chatlog__timestamp">28-Sep-20 08:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="760319927847747585" id="message-760319927847747585">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">DXM. A curious chemical I am still fond of today. Finding it through Google and one of my IRL friends (RIP), I was ready to travel into the land of euphoria and trippyness. It was grand even for 275mg Poli, my first trip. Before my second trip, with my research I decided to join Discord and Dextroverse ended up being my first server I joined in March 2017. I love having somewhere to be able to connect to other trippers. :)</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="trippy" title="trippy" src="https://cdn.discordapp.com/emojis/736986048588021791.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/454391708164030467/b222d598bf612fd7f0d7e77bcd4b2b02.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="zerokewl#0073" data-user-id="454391708164030467" style="color: rgb(154,110,206)">linguine_luigi</span>
+
+
+        <span class="chatlog__timestamp">29-Sep-20 01:40 AM</span>
+
+            <div class="chatlog__message " data-message-id="760390512028286988" id="message-760390512028286988">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I first learned about le world of dxm from ....well Erowid. First trip was a good ol 4ozer of satans cherry mentholated jizz. Been in the scene since 2005. I come to spread wisdom, int, and love <img class="emoji " alt="💘" title="💘" src="https://twemoji.maxcdn.com/2/72x72/1f498.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#129304;" title="&#129304;" src="https://twemoji.maxcdn.com/2/72x72/1f918.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/325835292030271498/b5093750a01d796de8e0488840ff1c1a.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="RubyDaBeachchair#4959" data-user-id="325835292030271498" style="color: rgb(255,185,133)">RubyDaBeachchair</span>
+
+
+        <span class="chatlog__timestamp">29-Sep-20 05:28 AM</span>
+
+            <div class="chatlog__message " data-message-id="760447924822999040" id="message-760447924822999040">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">My first DXM experience happened when i was 17 because i was searching for Ketamine HCL and i asked my friend who had sold me Percocet previously, and he told that he took dex in the woods and he was like &quot;bro i felt like a pair of eyes floating through the woods&quot; and i was enticed by this statement to try dex. So a few days later a took a 300mg bottle of wal-tussin gels, and they hit when i was sitting next to my dad, and i just had to try and stay composed, and the second he went back into his room i started bouncing off the walls, and talking to my ex girlfriend about the rise of conservatism in generation Z, just talking about absolutely insane topics, and id robowalk into my kitchen and walk out of my kitchen like 40 times until the trip was over.
+
+How i found out about Dextroverse. I had ordered 3-HO-PCP and i wanted to learn more about dissociatives so i joined this server in June of 2018 and i have met so many great people along the way! <img class="emoji " alt="😁" title="😁" src="https://twemoji.maxcdn.com/2/72x72/1f601.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="upvote" title="upvote" src="https://cdn.discordapp.com/emojis/662001913688096806.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/359137407167365121/d36addc01f26891cdbc65ce45babe549.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Hat#0308" data-user-id="359137407167365121" style="color: rgb(255,245,145)">Hat</span>
+
+
+        <span class="chatlog__timestamp">29-Sep-20 05:58 AM</span>
+
+            <div class="chatlog__message " data-message-id="760455536905945149" id="message-760455536905945149">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">found out about dxm from a discord friend. dont remember how i found the server</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="turnback" title="turnback" src="https://cdn.discordapp.com/emojis/733905024492503071.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/588638210805202964/c81c58325cb833b69cb3df1f357da2ed.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="ItsMeeSimbs#2416" data-user-id="588638210805202964" style="">ItsMeeSimbs</span>
+
+
+        <span class="chatlog__timestamp">29-Sep-20 06:03 AM</span>
+
+            <div class="chatlog__message " data-message-id="760456624720052224" id="message-760456624720052224">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">My first DXM experience occurred when I was a young kid. (I do not remember the exact age or any of my childhood really) I would be sick a lot when I was a kid with Strep throat and when the antibiotics didn’t work they’d give dxm syrup and I’d take a shit ton of it (not knowing ofc) and then trip balls lmao, plus I’m a slow metabolizer. So when my ‘first’ trip happened I basically traveled back to doing dxm as a kid and felt all those feelings again, and it was like reuniting with a long lost partner since I hadn’t put 2 and 2 together that I was accidentally getting high on OTC cough syrup<img class="emoji " alt="kek" title="kek" src="https://cdn.discordapp.com/emojis/680042327204430012.png"></span>
+
+                                <span class="chatlog__edited-timestamp" title="29-Sep-20 08:53 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="kek" title="kek" src="https://cdn.discordapp.com/emojis/680042327204430012.png">
+                                <span class="chatlog__reaction-count">9</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="wonkeye" title="wonkeye" src="https://cdn.discordapp.com/emojis/751702586603733002.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/321796189383032832/a_4e41ac5f32260341a757afa04d02e549.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="&#120371; &#120368; &#120368; &#120372; &#120364; &#120354; &#120357; &#120368; &#120368; &#120357; &#120365; &#120358;#0001" data-user-id="321796189383032832" style="color: rgb(60,231,198)">&#120371; &#120368; &#120368; &#120372; &#120364; &#120354; &#120357; &#120368; &#120368; &#120357; &#120365; &#120358;</span>
+
+
+        <span class="chatlog__timestamp">29-Sep-20 12:55 PM</span>
+
+            <div class="chatlog__message " data-message-id="760560475875442748" id="message-760560475875442748">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I was at a gathering with friends. One of the guys there would do DXM while he was in the army because that and alcohol was what they could get away with. He talked me into it and I took about 900mg at 170lbs and went back to his place. The come up went from 0-100 real fucking fast and I was in slow motion, tons of tracers. We walked back to Walmart to get more eventually and I was really worried about looking like a crack addict going to Walmart at 3am to pickup several boxes of cough medicine. They kept it in plastic antitheft cases and that didn’t help the sketchiness for me. We listened to El Ten Eleven and played geometry wars for hours, then I went to work the next day with the best afterglow.</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="trippy" title="trippy" src="https://cdn.discordapp.com/emojis/736986048588021791.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/597751045673713664/0f09756342b70e5f952d8a45dbd08ab8.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="eskimopie❤&#129505;&#128155;&#128154;&#128153;&#128156;#9998" data-user-id="597751045673713664" style="color: rgb(255,245,145)">eskimopie❤&#129505;&#128155;&#128154;&#128153;&#128156;[ILY! ILY!]</span>
+
+
+        <span class="chatlog__timestamp">29-Sep-20 03:05 PM</span>
+
+            <div class="chatlog__message " data-message-id="760593120415973416" id="message-760593120415973416">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Guys....420 words.....not 4,200 words....</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="kek" title="kek" src="https://cdn.discordapp.com/emojis/680042327204430012.png">
+                                <span class="chatlog__reaction-count">10</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/470286820505288745/25e203a5ec3feacedc1f235876dad7de.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Decayde#2493" data-user-id="470286820505288745" style="color: rgb(0,88,255)">ɖɛƈąყɖɛ&#165;€$</span>
+
+
+        <span class="chatlog__timestamp">29-Sep-20 04:41 PM</span>
+
+            <div class="chatlog__message " data-message-id="760617238398763068" id="message-760617238398763068">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Eskimo, I am the only one who wrote more than normal. Sorry if that bothered you.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/202994104609669121/e88fe64710767e1b4ad6ac53053df5ad.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="CAPRA KID &#128016;#4666" data-user-id="202994104609669121" style="color: rgb(99,213,121)">CAPRA KID &#128016;</span>
+
+
+        <span class="chatlog__timestamp">29-Sep-20 05:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="760626068020658186" id="message-760626068020658186">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I wrote exactly 420 words <img class="emoji " alt="goatuwu" title="goatuwu" src="https://cdn.discordapp.com/emojis/650287115602755584.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/470286820505288745/25e203a5ec3feacedc1f235876dad7de.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Decayde#2493" data-user-id="470286820505288745" style="color: rgb(0,88,255)">ɖɛƈąყɖɛ&#165;€$</span>
+
+
+        <span class="chatlog__timestamp">29-Sep-20 05:32 PM</span>
+
+            <div class="chatlog__message " data-message-id="760630080455835648" id="message-760630080455835648">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Don&#39;t worry. I deleted what I wrote. Sorry for the inconvenience. Won&#39;t be participating in this bullshit from now on.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/597751045673713664/0f09756342b70e5f952d8a45dbd08ab8.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="eskimopie❤&#129505;&#128155;&#128154;&#128153;&#128156;#9998" data-user-id="597751045673713664" style="color: rgb(255,245,145)">eskimopie❤&#129505;&#128155;&#128154;&#128153;&#128156;[ILY! ILY!]</span>
+
+
+        <span class="chatlog__timestamp">29-Sep-20 05:37 PM</span>
+
+            <div class="chatlog__message " data-message-id="760631251710771200" id="message-760631251710771200">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Holy hell.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="760631581621616650" id="message-760631581621616650">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I didn’t say you can’t write more, just that’s not for the specific event here. You can write as much as you want. It’s just not applicable to the event....</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/636401106024529920/f28ecdad2c2442ba809ccfaf097f4914.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Darkestlight#0757" data-user-id="636401106024529920" style="color: rgb(255,0,0)">Darkestlight</span>
+
+
+        <span class="chatlog__timestamp">29-Sep-20 06:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="760638880143114260" id="message-760638880143114260">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">was it more than 420 words, thats is a lot of words?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="760639025668161566" id="message-760639025668161566">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">kappa kid has a good example of what 420 words looks like</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/384584261040209921/aecc5e26d6930df7338b129dfb0e7d8e.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="pasta#0888" data-user-id="384584261040209921" style="color: rgb(255,0,0)">Pasta</span>
+
+
+        <span class="chatlog__timestamp">29-Sep-20 06:32 PM</span>
+
+            <div class="chatlog__message " data-message-id="760645171251118090" id="message-760645171251118090">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="Darkestlight#0757">@Darkestlight</span> 420 words or less</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/206505065744171008/064673d76e3c66b318d3ed7e6ab35909.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Hark#8752" data-user-id="206505065744171008" style="color: rgb(255,0,0)">꧁꧂Hark ꧁꧂</span>
+
+
+        <span class="chatlog__timestamp">29-Sep-20 06:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="760647050038738975" id="message-760647050038738975">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="Decayde#2493">@ɖɛƈąყɖɛ&#165;€$</span>  Repost it :P who cares</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="This" title="This" src="https://cdn.discordapp.com/emojis/685209973382578227.png">
+                                <span class="chatlog__reaction-count">6</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/256665331924205568/a_b84d698894788c10406694d7b9f9acc0.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Kerflap&#128720;#7525" data-user-id="256665331924205568" style="">Kerflap&#128720;</span>
+
+
+        <span class="chatlog__timestamp">29-Sep-20 09:56 PM</span>
+
+            <div class="chatlog__message " data-message-id="760696584198553610" id="message-760696584198553610">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="Decayde#2493">@ɖɛƈąყɖɛ&#165;€$</span> repost it the long one but can you reword it into a 420 word version for the contest as well? Like tldr?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="760696675584573461" id="message-760696675584573461">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">That would qualify</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="760696715161501736" id="message-760696715161501736">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">But id like the full read as well</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="760696731540258869" id="message-760696731540258869">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">:3</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="760696891670790154" id="message-760696891670790154">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I didnt get the chance to read it</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/597751045673713664/0f09756342b70e5f952d8a45dbd08ab8.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="eskimopie❤&#129505;&#128155;&#128154;&#128153;&#128156;#9998" data-user-id="597751045673713664" style="color: rgb(255,245,145)">eskimopie❤&#129505;&#128155;&#128154;&#128153;&#128156;[ILY! ILY!]</span>
+
+
+        <span class="chatlog__timestamp">29-Sep-20 09:58 PM</span>
+
+            <div class="chatlog__message " data-message-id="760696967449542686" id="message-760696967449542686">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">She can post whatever! I was just trying to say it won&#39;t be applicable to event. Was NOT trying to be rude <em><strong>at all.</strong></em> Sorry if I worded it in such a way that it came off snarkily. If she would like to post it with a hyphenated cutoff between the two (i.e. &quot;----------------------&quot;) that&#39;d be perfect! Or she can post the main one in <span class="mention">#drugs</span> or another channel?? I really was not trying to come off ingratiating.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/256665331924205568/a_b84d698894788c10406694d7b9f9acc0.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Kerflap&#128720;#7525" data-user-id="256665331924205568" style="">Kerflap&#128720;</span>
+
+
+        <span class="chatlog__timestamp">29-Sep-20 09:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="760697237705064468" id="message-760697237705064468">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="eskimopie❤&#129505;&#128155;&#128154;&#128153;&#128156;#9998">@eskimopie❤&#129505;&#128155;&#128154;&#128153;&#128156;[ILY! ILY!]</span> she can post the long version and then have a shorter TL;DR for the contest entry. That would work just fine :3</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="760697253219794965" id="message-760697253219794965">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">No harm done</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="760697487714811904" id="message-760697487714811904">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I&#39;m hoping to archive them somehow so thats why I want the word limit, but the long version is sooo much better to read lol</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/597751045673713664/0f09756342b70e5f952d8a45dbd08ab8.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="eskimopie❤&#129505;&#128155;&#128154;&#128153;&#128156;#9998" data-user-id="597751045673713664" style="color: rgb(255,245,145)">eskimopie❤&#129505;&#128155;&#128154;&#128153;&#128156;[ILY! ILY!]</span>
+
+
+        <span class="chatlog__timestamp">29-Sep-20 10:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="760697620632436756" id="message-760697620632436756">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="Kerflap&#128720;#7525">@Kerflap&#128720;</span> Concurred!</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/256665331924205568/a_b84d698894788c10406694d7b9f9acc0.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Kerflap&#128720;#7525" data-user-id="256665331924205568" style="">Kerflap&#128720;</span>
+
+
+        <span class="chatlog__timestamp">29-Sep-20 10:01 PM</span>
+
+            <div class="chatlog__message " data-message-id="760697711472279601" id="message-760697711472279601">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><img class="emoji emoji--large" alt="flappy1" title="flappy1" src="https://cdn.discordapp.com/emojis/660408595128647700.gif"> <img class="emoji emoji--large" alt="flappy3" title="flappy3" src="https://cdn.discordapp.com/emojis/660408669132816395.gif"> <img class="emoji emoji--large" alt="flappy2" title="flappy2" src="https://cdn.discordapp.com/emojis/660409152668958720.gif"> <img class="emoji emoji--large" alt="flappy3" title="flappy3" src="https://cdn.discordapp.com/emojis/660408669132816395.gif"> <img class="emoji emoji--large" alt="flappy1" title="flappy1" src="https://cdn.discordapp.com/emojis/660408595128647700.gif"></span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#128154;" title="&#128154;" src="https://twemoji.maxcdn.com/2/72x72/1f49a.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/747027404031131648/a_5c614f7187984a4242114a4589236887.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="I COME WITH KNIVES#0001" data-user-id="747027404031131648" style="color: rgb(4,250,249)">brynn</span>
+
+
+        <span class="chatlog__timestamp">30-Sep-20 12:45 AM</span>
+
+            <div class="chatlog__message " data-message-id="760739155293503508" id="message-760739155293503508">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">My initial DXM excursion was early 2018 -- possibly January or February. I don&#39;t remember. I had $14.00, nothing to do, and an unquenchable curiosity. I associated with a DXM user who consistently tripped and broke his neck in my DM during this time. I had money, and I hated my Dunkin&#39; Donuts job, so I wanted to unwind. That night when I clocked out, I beelined straight to the convenience store and purchased a box of NyQuil and a Dr. Pepper. I am a health-conscious person, so I Googled How Much Acetaminophen Will Cause Liver Damage, and I dosed to the limit. The come up brought this impending sense of doom, and I wrote a not-quite-a-suicide note on my phone, &quot;I fucking geeked and I took a box of NyQuil gels. If I die, I am so sorry. I just wanted to see colors.&quot; Whilst Googling the symptoms of dying. After coming up on NyQuil gels, I laid in my friend&#39;s bed and giggled like everything ever to exist was somehow hilarious. 
+
+Don&#39;t dose NyQuil gels btw.</span>
+
+                                <span class="chatlog__edited-timestamp" title="30-Sep-20 12:46 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="upvote" title="upvote" src="https://cdn.discordapp.com/emojis/662001913688096806.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+            <div class="chatlog__message " data-message-id="760739587738959894" id="message-760739587738959894">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="eskimopie❤&#129505;&#128155;&#128154;&#128153;&#128156;#9998">@eskimopie❤&#129505;&#128155;&#128154;&#128153;&#128156;[ILY! ILY!]</span> There Bro</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/597751045673713664/0f09756342b70e5f952d8a45dbd08ab8.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="eskimopie❤&#129505;&#128155;&#128154;&#128153;&#128156;#9998" data-user-id="597751045673713664" style="color: rgb(255,245,145)">eskimopie❤&#129505;&#128155;&#128154;&#128153;&#128156;[ILY! ILY!]</span>
+
+
+        <span class="chatlog__timestamp">30-Sep-20 12:48 AM</span>
+
+            <div class="chatlog__message " data-message-id="760739750377947168" id="message-760739750377947168">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">LMAO</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="760739771861172235" id="message-760739771861172235">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Thank you, Jyggs</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/597751045673713664/0f09756342b70e5f952d8a45dbd08ab8.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="eskimopie❤&#129505;&#128155;&#128154;&#128153;&#128156;#9998" data-user-id="597751045673713664" style="color: rgb(255,245,145)">eskimopie❤&#129505;&#128155;&#128154;&#128153;&#128156;[ILY! ILY!]</span>
+
+
+        <span class="chatlog__timestamp">30-Sep-20 01:00 AM</span>
+
+            <div class="chatlog__message " data-message-id="760742800207249449" id="message-760742800207249449">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">It is mid 2015. I am now ~3.25 years into my daily weed consumption habit. I had read up on legal highs as I was growing bored with weed and, despite asking nearly every druggie I knew, could not seem to find a seller of acid or shrooms. I found DXM on some Reddit post. I went to CVS and purchased a bottle of gels. I dosed roughly 350-400mg. I put on an episode of Family Guy. As the trip started to come up, I found this a very odd and unpleasant experience. The show seemed to be of little entertainment and I found the dissociative aspects of dexxing to be quite the uncomfortable aura. Nothing was serious or anxiety inducing about this, just boring and undesirable. As the trip went on, I played some games and watched some more Family Guy until I eventually passed out. A handful of experiences occurred sometime after that, generally all within the 350 to ~450mg range. None of these experiences was particularly captivating or made me desire to use it more. Fast forward to late 2019 and, having had left my job at a produce warehouse, I decided to eventually join Discord in order to join the r/jobs Discord. I was curious what ‘fun’ communities I could find. I eventually found r/trees and made myself a home there. I was banned sometime after this, likely just to my spazzy personality but I had never been particularly rude or disrespectful to anyone herein (save for letting them know they were scrubs and that I smoked more hash than them, because I did, because they are pathetic scrubs.) I was banned for being underage, cuz I was 17 (which is quite odd, as I was 25 and had never said I was 17, even as a joke.) I eventually asked the admins to prove this and they were unable, and eventually got back to me and said “yeah, we talked about it and it’s a no.” I went back to r/jobs primarily. Looking for modernist art Discords, I used the search function at the bottom of the servers tab and the only result for “art” was a KANYE Discord (go figure.)</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="blockheart" title="blockheart" src="https://cdn.discordapp.com/emojis/679969334143352834.gif">
+                                <span class="chatlog__reaction-count">3</span>
+                            </div>
+                    </div>
+            </div>
+            <div class="chatlog__message " data-message-id="760742801905942568" id="message-760742801905942568">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Fast forward about a few months later, and a user by the name of “jay” (who is still here) sends me an invite to this. I told him DXM sucks ass, and he told me, nah, it’s just a chill place. I found the love of my life here, and I’ve never looked back.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/527991297986920468/3a96de7a27f8c84141828a0194caf616.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="cswraith#3275" data-user-id="527991297986920468" style="color: rgb(154,0,113)">cswraith</span>
+
+
+        <span class="chatlog__timestamp">30-Sep-20 11:41 AM</span>
+
+            <div class="chatlog__message " data-message-id="760904139642241046" id="message-760904139642241046">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Joined this server last yr n met some dude named dex rex who convinced me nanobots were in my robocough and the CIA was tryna control my astral vessel, fell in love with this place ever since. I’ve met a lot of great ppl on here which is why I stay</span>
+
+                                <span class="chatlog__edited-timestamp" title="30-Sep-20 11:42 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="kek" title="kek" src="https://cdn.discordapp.com/emojis/680042327204430012.png">
+                                <span class="chatlog__reaction-count">7</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="thistbh1" title="thistbh1" src="https://cdn.discordapp.com/emojis/692157569564934226.png">
+                                <span class="chatlog__reaction-count">4</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="blockheart" title="blockheart" src="https://cdn.discordapp.com/emojis/679969334143352834.gif">
+                                <span class="chatlog__reaction-count">4</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/326209840651304961/10d9a36e43e6e0aeff64ef3e750feb89.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Donko#7572" data-user-id="326209840651304961" style="">Donko</span>
+
+
+        <span class="chatlog__timestamp">30-Sep-20 03:25 PM</span>
+
+            <div class="chatlog__message " data-message-id="760960561558192149" id="message-760960561558192149">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Was depressed af and found out ab DXM while in my first IOP. It not showing up on tests and being legal peaked my interests. I did my research and ordered robocough. I instantly fell in love w it and became more involved on the dxm sub. Someone linked me here and I joined because up until like this month I never had any friends who liked and did dxm. Dxm has done a lot for me w my mental health and I&#39;ve met some amazing and interesting people here so even when I get paranoid I stay here.</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="upvote" title="upvote" src="https://cdn.discordapp.com/emojis/662001913688096806.png">
+                                <span class="chatlog__reaction-count">2</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/695627499891065033/165bbcd1d760927078d847ea20c441c9.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Doktor9#5168" data-user-id="695627499891065033" style="color: rgb(198,175,103)">Boofster</span>
+
+
+        <span class="chatlog__timestamp">30-Sep-20 11:27 PM</span>
+
+            <div class="chatlog__message " data-message-id="761081898419355668" id="message-761081898419355668">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I discovered DXM before I even knew it was DXM. My dealer friend showed me one of his favourites: wwe shared a bottle of Cepacol Cough Linctus and I got the disso feeling and robo-walk after a 150mg first trip. I took an immediate liking, and eventually bought and tried, by myself, 300mg, and had an amazing 3rd plateau trip - Cepacol also contains doxylamine, a very good potentiator.  Then one day I took two bottles of Cepacol, making 600mg DXM, and a shitload of doxylamine and had an amazing, astral, fourth plateau trip. I was sold. One day on some usenet (giving away my age) <span class="pre pre--inline">alt.drugs.xxx.yyy</span> channel, I found a discussion of DXM  and put 2 and 2 together, and knew I was suddenly I huge fan of dxm.
+
+Some 20 years later, when I stopped drinking, I got interested in DXM again, and after a few trips, something made me visit r/DXM out of curiosity. I saw the discord link, and wondering what this discord was, followed the link. a few months later I&#39;m still here.</span>
+
+                                <span class="chatlog__edited-timestamp" title="01-Oct-20 01:41 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="thomashobbes" title="thomashobbes" src="https://cdn.discordapp.com/emojis/681013303455121444.png">
+                                <span class="chatlog__reaction-count">2</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/470286820505288745/25e203a5ec3feacedc1f235876dad7de.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Decayde#2493" data-user-id="470286820505288745" style="color: rgb(0,88,255)">ɖɛƈąყɖɛ&#165;€$</span>
+
+
+        <span class="chatlog__timestamp">01-Oct-20 04:55 AM</span>
+
+            <div class="chatlog__message " data-message-id="761164319719161866" id="message-761164319719161866">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://tenor.com/view/did-not-read-lol-gif-13194398">https://tenor.com/view/did-not-read-lol-gif-13194398</a></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/377225864301248512/5d9524a23d1d37176146b9d83fc628c6.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="JenIsWoman1#6570" data-user-id="377225864301248512" style="color: rgb(136,184,136)">JenIsWoman1</span>
+
+
+        <span class="chatlog__timestamp">01-Oct-20 09:13 AM</span>
+
+            <div class="chatlog__message " data-message-id="761229275785330718" id="message-761229275785330718">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">One day I was just hanging out and I remembered hearing about being able to trip on OTC cough medicine. I did a bunch of research and Googling stuff and I realized that DXM was what I was looking for. I joined the discord because I found it from Reddit and I wanted more information. I found some amazing people that accompanied my first trip and I&#39;m still here now <img class="emoji " alt="😊" title="😊" src="https://twemoji.maxcdn.com/2/72x72/1f60a.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="upvote" title="upvote" src="https://cdn.discordapp.com/emojis/662001913688096806.png">
+                                <span class="chatlog__reaction-count">2</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/608035390850334727/dcaab8d0b83a306b5e6a17626737a32a.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Tots#7988" data-user-id="608035390850334727" style="">Tots</span>
+
+
+        <span class="chatlog__timestamp">01-Oct-20 05:58 PM</span>
+
+            <div class="chatlog__message " data-message-id="761361362608848939" id="message-761361362608848939">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I fucked a goose</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="kek" title="kek" src="https://cdn.discordapp.com/emojis/680042327204430012.png">
+                                <span class="chatlog__reaction-count">9</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="ech" title="ech" src="https://cdn.discordapp.com/emojis/742937432613191702.png">
+                                <span class="chatlog__reaction-count">4</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="okdad" title="okdad" src="https://cdn.discordapp.com/emojis/666667889993973771.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/636401106024529920/f28ecdad2c2442ba809ccfaf097f4914.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Darkestlight#0757" data-user-id="636401106024529920" style="color: rgb(255,0,0)">Darkestlight</span>
+
+
+        <span class="chatlog__timestamp">01-Oct-20 05:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="761361581123698708" id="message-761361581123698708">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I was at a rehab and had this one girl who was my best friend there she did a lot of unsavory drugs, but she also did DXM. I never had done DXM at this time. she talked so highly of it so I decided when I got out to give it a try. My first experience was amazing. I felt like I was one with the universe, I sad back on my couch and felt myself dissolve into it and after I came down i though to myself, &quot;I don&#39;t know what the fuck that was, but I&#39;m hooked&quot; later i went on the DXM sub found a link to here, got sober for 8 months than I because active in here when i started my psychonaut journy... and the rest was history. Stay safe and I love you all ❤️  <img class="emoji " alt="ech" title="ech" src="https://cdn.discordapp.com/emojis/742937432613191702.png"> ❤️</span>
+
+                                <span class="chatlog__edited-timestamp" title="01-Oct-20 07:04 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#129728;" title="&#129728;" src="https://twemoji.maxcdn.com/2/72x72/1fac0.png">
+                                <span class="chatlog__reaction-count">5</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/431986223754510348/9e1143d931eac27602b4043fcf7712f5.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Azert#3056" data-user-id="431986223754510348" style="">Azert</span>
+
+
+        <span class="chatlog__timestamp">01-Oct-20 05:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="761361752066752523" id="message-761361752066752523">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">found out cus i was depressed and wanted to try new things and joined the sub for memes and info</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="upvote" title="upvote" src="https://cdn.discordapp.com/emojis/662001913688096806.png">
+                                <span class="chatlog__reaction-count">2</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/295602479012249611/56779528d841133df8cd2bf81cfe70f7.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Voxii#3524" data-user-id="295602479012249611" style="color: rgb(255,79,206)">Voxii</span>
+
+
+        <span class="chatlog__timestamp">01-Oct-20 06:02 PM</span>
+
+            <div class="chatlog__message " data-message-id="761362523399913504" id="message-761362523399913504">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I was feeling pretty down and was looking for ways to escape. DXM was sort of the first drug I really got into but I had some prior substance experiences. I realized I could get it pretty easily so I went for it. It was a great experience and I’ve loved it since. However, I’ve noticed that there are real risks so I’ve been clean from DXM for a little.</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="upvote" title="upvote" src="https://cdn.discordapp.com/emojis/662001913688096806.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/256665331924205568/a_b84d698894788c10406694d7b9f9acc0.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Kerflap&#128720;#7525" data-user-id="256665331924205568" style="">Kerflap&#128720;</span>
+
+
+        <span class="chatlog__timestamp">01-Oct-20 06:06 PM</span>
+
+            <div class="chatlog__message " data-message-id="761363373240745986" id="message-761363373240745986">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="Tots#7988">@Tots</span> umm.... I dont think that qualifies... good try though lol</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/608035390850334727/dcaab8d0b83a306b5e6a17626737a32a.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Tots#7988" data-user-id="608035390850334727" style="">Tots</span>
+
+
+        <span class="chatlog__timestamp">01-Oct-20 06:20 PM</span>
+
+            <div class="chatlog__message " data-message-id="761367044082892811" id="message-761367044082892811">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Wtf do I do then</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="761367065083772949" id="message-761367065083772949">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Wait does that count ^</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/256488092066775044/f41987110ceb643c7849be39cc06d538.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Guardian【=◈︿◈=】#4247" data-user-id="256488092066775044" style="">Guardian【=◈︿◈=】</span>
+
+
+        <span class="chatlog__timestamp">01-Oct-20 06:32 PM</span>
+
+            <div class="chatlog__message " data-message-id="761370002657378305" id="message-761370002657378305">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I was very young when I discovered DXM... probably younger than most. I can&#39;t remember the exact age but I was definitely less than 10 years old. With the advent of online streaming services, came an even easier way for children to access television shows their parents didn&#39;t approve of. My younger self had been exposed to some of the more tame adult animations such as Family Guy and The Simpsons... but what I discovered that day not only changed my view on comedy, but would also lead to the eventuality of my finding the greatest drug known to man.
+
+Many years later, when I turned 15, I had started to get into drugs. Me being a more safety concerned teenager than many, I actually put in a fair bit of research before I decided to put mind altering substances in my body. I had decided that I would stay away from the more addictive/damaging substances, and thus I searched online about the effects/dangers of every drug I had access to. And suddenly... a random bit of information flooded back to my mind. That damn episode of South Park where they drank cough syrup to get high. Suddenly I was googling the effects, which lead me to bluelight, drugs-forum, and erowid.
+
+I spent hours... days... weeks reading experience reports, personal anecdotes, discussions, and research studies on dxm. I tried to get every possible piece of info I could before finally deciding to try it. After my first trip, (which I enjoyed), I actually never touched it again for two years. By then (2017) Discord had been widely popularized, and I stumbled upon the DXM subreddit, where this server link was the first post pinned on the sub.</span>
+
+                                <span class="chatlog__edited-timestamp" title="01-Oct-20 06:58 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="woohoo" title="woohoo" src="https://cdn.discordapp.com/emojis/681045717040758801.png">
+                                <span class="chatlog__reaction-count">2</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/256665331924205568/a_b84d698894788c10406694d7b9f9acc0.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Kerflap&#128720;#7525" data-user-id="256665331924205568" style="">Kerflap&#128720;</span>
+
+
+        <span class="chatlog__timestamp">01-Oct-20 06:51 PM</span>
+
+            <div class="chatlog__message " data-message-id="761374748269215764" id="message-761374748269215764">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="Tots#7988">@Tots</span> tell us how you got into dxm then how you got into the dextroverse</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/608035390850334727/dcaab8d0b83a306b5e6a17626737a32a.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Tots#7988" data-user-id="608035390850334727" style="">Tots</span>
+
+
+        <span class="chatlog__timestamp">01-Oct-20 06:51 PM</span>
+
+            <div class="chatlog__message " data-message-id="761374801230823424" id="message-761374801230823424">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Oh</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/256665331924205568/a_b84d698894788c10406694d7b9f9acc0.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Kerflap&#128720;#7525" data-user-id="256665331924205568" style="">Kerflap&#128720;</span>
+
+
+        <span class="chatlog__timestamp">01-Oct-20 06:52 PM</span>
+
+            <div class="chatlog__message " data-message-id="761375099483062293" id="message-761375099483062293">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">lol</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/457002895800533004/a18efc750e6f75800d8ae97c85cd0bea.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="babysnakes#6606" data-user-id="457002895800533004" style="color: rgb(79,177,236)">Бабаsnakes</span>
+
+
+        <span class="chatlog__timestamp">01-Oct-20 07:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="761391366697517056" id="message-761391366697517056">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I found the Dextroverse, in it&#39;s original website form, long ago as a teenager, shortly before I had even done DXM. My high school friend (and later boyfriend) was very into DXM, and he was such a freak I thought he was the coolest. I must have just done a cursory search on a browser online and found dextroverse.org. We had to write a one-paragraph essay on what DXM means to us to be able to be verified for membership, so this is a cute full-circle here ;y. I learned that contrary to my friends advice, CCCs are bad, guaif is bad, and learned all the basic stuff from people much older than me.  Eventually I joined the IRC component. Servers then are much different from now, people are rough and trolly and you have to hold your own and deal with a lot of non-pc, super inflammatory, bad-vibes shit lol. Which I did,tbh, but not without quitting and re-joining over many years and now it&#39;s stuck. DXM has been a near-constant in my life; there was maybe one year I didn&#39;t do any DXM at all, otherwise it is an at-least-monthly therapy for me. Then I found discord, there was a small, inactive discord created by DVIRC people, and sure enough there was a &quot;Dextroverse&quot; discord which I found to be totally unaffiliated with the DV I had known and loved for years. Soo, I gave them a lot of shit about it, and tbh I hardly hung out here for the first few months, preferring Eternity then the Black Lodge (the latter I created to congregate people from DVIRC, as it had split apart at the hands of at one specactular troll and a bunch of drama).. but found myself back again at this new-DV. I love the people here and I love being able to integrate the old DV and the new. We are all DV, every weirdass dexer is a part of the Dextroverse and I hope they can find in us a home.</span>
+
+                                <span class="chatlog__edited-timestamp" title="01-Oct-20 07:57 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="upvote" title="upvote" src="https://cdn.discordapp.com/emojis/662001913688096806.png">
+                                <span class="chatlog__reaction-count">3</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Deleted User#0000" data-user-id="456226577798135808" style="">Deleted User</span>
+
+
+        <span class="chatlog__timestamp">01-Oct-20 08:05 PM</span>
+
+            <div class="chatlog__message " data-message-id="761393272526471190" id="message-761393272526471190">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i went a little over</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="761393321154576444" id="message-761393321154576444">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">When I was 16 or so I started seriously dabbling in psyechedelics. I hung out on Erowid a lot and found DXM, which led me to the OGDV forums. They allowed minors in, I submitted a brief essay an was allowed to join.
+I used DXM habitually through my teen years, and this was a launching off point for me to really wild out. But, more importantly, I made some amazing friends. I met a chemist on there who would mail me his RC and DMT synths, I met cool people, had a wild time.     
+Through my 20’s I wilded out on hard drugs, and in 2018 I entered one of the hardest times of my life. I was 30, fresh out of a breakup, living alone, addicted to IV meth, and looking at a prison sentence. I have never been more alone. I sproadically used DXM, it is one of three drugs with which I have never had an addictive or abusive relationship. 
+Towards the end of the year, I got my sentence and got out of having to go to prison. At this time I was invited to Sneks’ server, the Lodge, and reconnected with a bunch of old friends. I had been on a 10 year hiatus from DV but they found me at the right time. Fresh out of jail, I moved from Oregon to Colorado to live with an old DV friend. That shit went south quick, as I struggled with my sobriety, but I stayed on Discord talkig to my DV friends. 
+After I blew up the spot, I found myself living with your beloved server owner. Had I known, at age 16, how pivotal joining the DV would be, well…I’d do exactly what I did because it was awesome. I’d do it all over a million times.
+So I’ve been using DXM for almost 17 years now. I’ve been in and out of rehab and sobriety but will not give up DXM. It is a tool I use to examine my life; an outside, objective view is necessary to process certain events and emotions. I also use it as a bookend to major life events, once something happens in my life I can take DXM and examine the situation.</span>
+
+                                <span class="chatlog__edited-timestamp" title="01-Oct-20 08:08 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="761393326716092478" id="message-761393326716092478">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Back in Oregon, when I was an addict, DXM was the one drug my then-partner was comfortable with me using. I’d get silly and laugh, but it did bother her when I’d take too much and she’d wake up to me crying at the top of the stairs because I couldn’t get down them and I had to use the bathroom.
+DXM and its online community have been as pivotal to my life as the punk scene was, which I found when I was 13. Between punk, scifi, and drugs, I’ve become the person I am today. I am not perfect or even that greatt, but I like me.</span>
+
+                                <span class="chatlog__edited-timestamp" title="01-Oct-20 08:08 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#128077;" title="&#128077;" src="https://twemoji.maxcdn.com/2/72x72/1f44d.png">
+                                <span class="chatlog__reaction-count">3</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="wkek" title="wkek" src="https://cdn.discordapp.com/emojis/753667502491435039.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="okdad" title="okdad" src="https://cdn.discordapp.com/emojis/666667889993973771.png">
+                                <span class="chatlog__reaction-count">2</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/755658068733329419/6990eb17a136bfb5d108f7828fe095ff.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="CarterWasted#0295" data-user-id="755658068733329419" style="color: rgb(156,128,192)">CarterWasted</span>
+
+
+        <span class="chatlog__timestamp">01-Oct-20 08:18 PM</span>
+
+            <div class="chatlog__message " data-message-id="761396691974488124" id="message-761396691974488124">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I have no idea exactly how I found this particular discord, but I&#39;m trying to remember. I first learned about a Dextroverse from 420Chan. I found the DVIRC and the DV forum. I wasn&#39;t interested in any IRC at that time, but I really wanted to lurk the forum. The little essay that was required to participate on the forum was too daunting of a task, so I left and tried to forget about it. 420Chan was still doing tinychats (Godlovesdxm/mxe), but eventually that stopped. Somehow I was still hearing about a dextroverse. I must have found this server when it was the main one associated with r/dxm. Oh I&#39;m also supposed to write about how I found dxm. I don&#39;t exactly remember that either. I started using at age 16 or 17 years, so that was the middle of high school. I had one friend doing it too, but that was when I was 18 years old. It must of been those cool kids that sat at the back of the school bus that taught me about it. I wasn&#39;t cool enough to hang out with them, but after every school day while on the bus to go home, I would sit close enough to them to overhear their conversations. That&#39;s how I learned about dph and other drug stuff. I don&#39;t remember the first time I did dxm, but it must have been great because I&#39;ve been hooked on it since the beginning. I wish zicam spray was still alive, so I could compare it side by side with robocough. Sorry idk how many words this is.</span>
+
+                                <span class="chatlog__edited-timestamp" title="01-Oct-20 08:34 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="upvote" title="upvote" src="https://cdn.discordapp.com/emojis/662001913688096806.png">
+                                <span class="chatlog__reaction-count">2</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/470286820505288745/25e203a5ec3feacedc1f235876dad7de.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Decayde#2493" data-user-id="470286820505288745" style="color: rgb(0,88,255)">ɖɛƈąყɖɛ&#165;€$</span>
+
+
+        <span class="chatlog__timestamp">01-Oct-20 08:35 PM</span>
+
+            <div class="chatlog__message " data-message-id="761401058417049610" id="message-761401058417049610">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I have known about Dextromethorpan for many years. I frequently came across the name when selling cough syrup over the counter during the peaks of common cold and flu season. I didn’t really know anyone who was using it off label and self-medicating with DXM when I first became aware of it. However, I did end up having one person in my life who used the medicine as what he referred to as a “special kind of sacrament”. I was very curious about this and asked about his usage of the substance. He began by telling me that he used Coricidin HBP Cough and Cold (Triple C’s) at higher dosages than required to gain a hallucinogenic intoxication of sorts. He told me about some of these DXM trips that he would partake in. He also explained that some of his modes of consciousness would be affected and that his perception of reality would change and shift due to the drug. He also denoted that he would have healing during these trips and he started taking higher thresholds of the Coricidin to stimulate longer and more intense effects. But, then shortly after having a few bad experiences with the Coricidin, he stopped using Dextromethorphan all together. He warned me that the way he was using it was becoming harmful for himself and after retelling me of out of body experiences that were terrifying for himself, he made it clear that risks were involved dosing on this very powerful drug.</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="❣️" title="❣️" src="https://twemoji.maxcdn.com/2/72x72/2763.png">
+                                <span class="chatlog__reaction-count">2</span>
+                            </div>
+                    </div>
+            </div>
+            <div class="chatlog__message " data-message-id="761401126419169332" id="message-761401126419169332">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Honestly, after hearing this very trusted source tell me the intimacy of his usage with dextromethorphan, I really was slightly timorous to trip on the substance. The effects that my friend described sounded wildly unworldly and so very fucking intense. I definitely knew I was not prepared to do it alone and it didn’t seem like there was a sociability mixed in with the drug so I strongly doubted that any of my friends would have wanted to dose out on DXM recreationally. It was more likely that my group of friends would have a fondness of LSD or Ketamine use and I never really questioned taking DXM again...Until many years later, of course.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="761401197823000606" id="message-761401197823000606">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">At this point in my life, my body was beginning to manifest pain in a very atypical way. I had very extreme lower back pain and nerve pain in my leg that was debilitating. I went on to receiving a diagnosis from a Neurologist stating that I had an irregularity of my spine. A congenital anomaly known as sacralization. The discovery of this spinal malformation really impacted my life. It caused such severe nerve damage to my lower extremities that it affected my ability to do my job. Taking care of simple household chores became afflictions. I started to fall into a depression when I realized that my Marijuana usage was no longer helping to dispel the sharp, stabbing pain. I was lost in the hurting. I questioned if I wanted to live the rest of my days in this agonizing pain.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="761401313703231528" id="message-761401313703231528">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I had to do something to combat these thoughts and pains. I had to try for myself to find some sort of healing that could allow me just to be at peace with my nerves. I couldn’t just lay down and accept defeat, the medications that were being prescribed were not helping and I decided to take action my own self by medicating with different substances. I had been reading about the pharmakinetics of dextromethorphan. DXM stood out to me because of its antagonistic effect on the NDMA receptors. Medical literature has proposed that dextromethorphan has a preemptive analgesic effect by preventing NMDA-mediated calcium current and subsequent modulation of nociception in spinal pain fibers and the central nervous system. This shows how DXM can benefit chronic pain conditions including diabetic neuropathy, postherpetic neuralgia, and phantom limp pain. Could this be it? Could this medication sold as an over the counter cough syrup actually waver my neuropathic pain? I made a determination that I would try it.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="761401397760622602" id="message-761401397760622602">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">After asking a few more questions, asking for more details of personal use. I ended up discussing this with an online friend who told me he would invite me to this discord DXM server where people could help me. That community ended up being the Dextroverse. You have no idea how grateful I am that the DV exists, without reading over your advice and building friendships here I may not have been so encouraged to try Dextromethorphan. I am not saying this in a way where I feel like anyone over encouraged me to use with peer pressure. I’m just very lucky that the Dextroverse had been there for me when I most needed it most. Using DXM responsibly has absolutely and immensely helped with my nerve pain and has improved my quality of life drastically.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="761401563545600002" id="message-761401563545600002">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">By the way, this is only 806 words. So, I don&#39;t really know why there was a complaint of &quot;TLDR&quot; orginally.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="761401711574253599" id="message-761401711574253599">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">there is literally one sentence on a second page.</span>
+
+                                <span class="chatlog__edited-timestamp" title="01-Oct-20 08:40 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="upvote" title="upvote" src="https://cdn.discordapp.com/emojis/662001913688096806.png">
+                                <span class="chatlog__reaction-count">3</span>
+                            </div>
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="eeveewow" title="eeveewow" src="https://cdn.discordapp.com/emojis/645087243081613321.png">
+                                <span class="chatlog__reaction-count">2</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/256665331924205568/a_b84d698894788c10406694d7b9f9acc0.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Kerflap&#128720;#7525" data-user-id="256665331924205568" style="">Kerflap&#128720;</span>
+
+
+        <span class="chatlog__timestamp">01-Oct-20 09:14 PM</span>
+
+            <div class="chatlog__message " data-message-id="761410638693531679" id="message-761410638693531679">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="Darkestlight#0757">@Darkestlight</span>  <em><strong>YOU WIN!!</strong></em></span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="Pog" title="Pog" src="https://cdn.discordapp.com/emojis/641085559414063104.png">
+                                <span class="chatlog__reaction-count">3</span>
+                            </div>
+                    </div>
+            </div>
+            <div class="chatlog__message " data-message-id="761410698780999697" id="message-761410698780999697">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I&#39;ll post the video of the selector in a bit</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="761410704887513139" id="message-761410704887513139">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">lol</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="lies" title="lies" src="https://cdn.discordapp.com/emojis/640294930111004693.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 83 message(s)</div>
+</div>
+
+</body>
+
+</html>
